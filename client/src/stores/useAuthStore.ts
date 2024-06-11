@@ -1,14 +1,20 @@
 import create from 'zustand';
 
-interface UserData {
-  email: string;
-  name: string;
+interface AuthState {
+  isAuthenticated: boolean;
+  user: string | null;
+  isLoading: boolean;
+  setLoading: (loading: boolean) => void;
+  login: (userData: any) => void;
+  logout: () => void;
 }
 
-const useAuthStore = create((set) => ({
+const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
   user: null,
-  login: (userData: UserData) => set({ isAuthenticated: true, user: userData }),
+  isLoading: false,
+  setLoading: (loading) => set({ isLoading: loading }),
+  login: (userData) => set({ isAuthenticated: true, user: userData }),
   logout: () => set({ isAuthenticated: false, user: null }),
 }));
 

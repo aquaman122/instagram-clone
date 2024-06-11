@@ -1,5 +1,7 @@
+import SignIn from "@/pages/auth/signin";
+
 export default function Home() {
   return (
-    <div>hi</div>
+    <SignIn />
   );
 }

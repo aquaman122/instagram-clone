@@ -30,7 +30,6 @@ export default function SignIn() {
     } else {
       login({ email: data.email });
       router.push('/main');
-      console.log(1);
     }
     setLoading(false);
   };

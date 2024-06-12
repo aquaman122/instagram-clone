@@ -1,5 +1,5 @@
 'use client'
-import 'tailwindcss/tailwind.css';
+import '@/app/globals.css';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import useAuthStore from '@/stores/useAuthStore';

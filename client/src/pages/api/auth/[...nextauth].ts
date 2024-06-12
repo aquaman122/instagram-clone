@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
 
           const userCredential = await signInWithEmailAndPassword(
             auth,
-            credentials.email as string,
+            credentials?.email as string,
             credentials?.password as string,
           );
           const user = userCredential.user;
@@ -27,14 +27,17 @@ export const authOptions: NextAuthOptions = {
             return {
               id: user.uid,
               email: user.email,
-              name: user.displayName || user.email || "",
+              name: user.displayName || "",
             };
           } else {
             return null;
           }
-        } catch (error) {
-          console.error(error);
-          return null;
+        } catch (error: any) {
+          console.error(error.message);
+          if (error.code === 'auth/wrong-password') {
+            throw new Error('잘못된 비밀번호입니다.');
+          }
+          throw new Error('로그인 중 문제가 발생했습니다.');
         }
       },
     }),
@@ -54,8 +57,6 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.name = user.name;
-        token.email = user.email;
       }
       return token;
     },

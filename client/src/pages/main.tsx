@@ -1,6 +1,7 @@
 import '@/app/globals.css'
 import Header from '@/components/Header';
 import Nav from '@/components/Nav';
+import NavBar from '@/components/NavBar';
 import Post from '@/components/Post';
 import { useRouter } from 'next/router';
 
@@ -23,7 +24,7 @@ const MainPage = () => {
             }
           </section>
           </div>
-          {/* <NavBar documentId={documentId} /> */}
+          <NavBar documentId={currentPath} />
         </div>
       </article>
     </>
